@@ -1,13 +1,17 @@
 <?php
 
-namespace aharen;
+namespace aharen\Pay;
 
-class Pay
+class Gateway
 {
-    public function __construct()
+    protected $provider;
+
+    public static function create(string $provide)
     {
-        dd('asd sss');
+        return $provider;
+        // return $this;
     }
+
     // protected $provider;
 
     // public function __construct()
