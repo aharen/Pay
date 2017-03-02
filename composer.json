@@ -1,0 +1,19 @@
+{
+    "name": "aharen/pay",
+    "description": "Payments with Bank of Maldives & Maldives Islamic Bank",
+    "type": "package",
+    "license": "MIT",
+    "authors": [{
+        "name": "Ahmed Khusaam",
+        "email": "hello@khusaam.com"
+    }],
+    "minimum-stability": "dev",
+    "require": {
+        "aharen/mpg": "1.0.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "aharen\\": "src/"
+        }
+    }
+}

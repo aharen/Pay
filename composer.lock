@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "e38e1db3eb761443eb9fd7f8ba38756f",
+    "packages": [
+        {
+            "name": "aharen/mpg",
+            "version": "v1.0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/aharen/MPG.git",
+                "reference": "6282836cae1a3e36e3c6747781888ee6c94a4f87"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/aharen/MPG/zipball/6282836cae1a3e36e3c6747781888ee6c94a4f87",
+                "reference": "6282836cae1a3e36e3c6747781888ee6c94a4f87",
+                "shasum": ""
+            },
+            "type": "package",
+            "autoload": {
+                "psr-4": {
+                    "aharen\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ahmed Khusaam",
+                    "email": "hello@khusaam.com"
+                }
+            ],
+            "description": "Maldives Payment Gateway (MPG) by Bank of Maldives",
+            "keywords": [
+                "Bank",
+                "MPG",
+                "gateway",
+                "maldives",
+                "payment"
+            ],
+            "time": "2017-02-22T08:22:24+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": []
+}
