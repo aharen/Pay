@@ -62,7 +62,6 @@ PurchaseCurrency | 462 | no
 PurchaseCurrencyExponent | 2 | no
 Version | MIB: 1, MPG: 1.1 | no
 SignatureMethod | SHA1 | no
-SignatureMethod | SHA1 | no
 
 ### Transaction
 
