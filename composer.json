@@ -1,7 +1,8 @@
 {
     "name": "aharen/pay",
-    "description": "Payment processing with Bank of Maldives & Maldives Islamic Bank",
-    "type": "package",
+    "description": "Payment processing with Bank of Maldives/Maldives Payment Gateway (MPG) & Maldives Islamic Bank (MIB)",
+    "keywords": ["maldives", "payment", "gateway", "mpg", "bml", "fisa", "fisanet", "bank", "mib"],
+    "type": "library",
     "license": "MIT",
     "authors": [{
         "name": "Ahmed Khusaam",
