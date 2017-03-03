@@ -2,7 +2,7 @@
 
 namespace aharen\Pay\Providers;
 
-class MPGProvider extends AbstractProvider
+class MIBProvider extends AbstractProvider
 {
     protected function rules()
     {
@@ -24,7 +24,7 @@ class MPGProvider extends AbstractProvider
         return [
             'PurchaseCurrency'         => '462',
             'PurchaseCurrencyExponent' => '2',
-            'Version'                  => '1.1',
+            'Version'                  => '1',
             'SignatureMethod'          => 'SHA1',
         ];
     }
@@ -47,7 +47,21 @@ class MPGProvider extends AbstractProvider
             $this->config['PurchaseCurrency'];
         }
 
-        return base64_encode(sha1($signatureValue, true));
+        if ($this->config['SignatureMethod'] === 'SHA1') {
+            return $this->makeSHA1Signature($signatureValue);
+        }
+
+        return $this->makeMD5Signature($signatureValue);
+    }
+
+    protected function makeMD5Signature($signatureValue)
+    {
+        return base64_encode(hash('md5', $signatureValue, true));
+    }
+
+    protected function makeSHA1Signature($signatureValue)
+    {
+        return base64_encode(hash('sha1', $signatureValue, true));
     }
 
     protected function makePurchaseAmt(float $amount)

@@ -2,35 +2,46 @@
 
 namespace aharen\Pay;
 
+use aharen\Pay\Exceptions\InvalidProviderException;
+
 class Gateway
 {
     protected $provider;
 
-    public static function create(string $provide)
+    public function __construct(string $provider)
     {
-        return $provider;
-        // return $this;
+        $this->provider = $this->makeProvider($provider);
+        return $this;
     }
 
-    // protected $provider;
+    protected function makeProvider(string $provider)
+    {
+        $providerClass = "\aharen\Pay\Providers\\" . $provider . 'Provider';
+        if (!class_exists($providerClass)) {
+            throw new InvalidProviderException;
+        }
+        return new $providerClass();
+    }
 
-    // public function __construct()
-    // {
-    // }
+    public function config(array $config)
+    {
+        $this->provider->make($config);
+        return $this;
+    }
 
-    // protected function construct(string $provider)
-    // {
-    //     $this->provider = $this->makeProvider($provider);
-    // }
+    public function transaction(float $amount, string $orderId)
+    {
+        $this->provider->transaction($amount, $orderId);
+        return $this;
+    }
 
-    // protected function makeProvider(string $provider)
-    // {
-    //     $providerClass = "\aharen\Pay\Providers\$provider";
-    //     return get_class(new $providerClass());
-    // }
+    public function get()
+    {
+        return $this->provider->get();
+    }
 
-    // public function make($config)
-    // {
-    //     $this->construct();
-    // }
+    public function verify($signature)
+    {
+        return $this->provider->verify($signature);
+    }
 }
