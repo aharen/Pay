@@ -75,7 +75,7 @@ class MIBProvider extends AbstractProvider
 
     protected function makePurchaseAmt(float $amount)
     {
-        $decimalAmount = number_format($amount, $this->getExponent());
+        $decimalAmount = number_format($amount, $this->getExponent(), '.', '');
         return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
     }
 }
