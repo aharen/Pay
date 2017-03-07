@@ -29,10 +29,19 @@ class MPGProvider extends AbstractProvider
         ];
     }
 
-    function unset() {
+    protected function remove()
+    {
         return [
             'MerPassword',
         ];
+    }
+
+    protected function getExponent()
+    {
+        if (!isset($this->config['PurchaseCurrencyExponent'])) {
+            return $this->defaults()['PurchaseCurrencyExponent'];
+        }
+        return parent::getExponent();
     }
 
     protected function makeSignature($response = false)
@@ -52,6 +61,7 @@ class MPGProvider extends AbstractProvider
 
     protected function makePurchaseAmt(float $amount)
     {
-        return str_pad(str_replace('.', '', $amount), 12, 0, STR_PAD_LEFT);
+        $decimalAmount = number_format($amount, $this->getExponent());
+        return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
     }
 }

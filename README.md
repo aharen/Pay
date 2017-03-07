@@ -62,6 +62,7 @@ PurchaseCurrency | 462 | no
 PurchaseCurrencyExponent | 2 | no
 Version | MIB: 1, MPG: 1.1 | no
 SignatureMethod | SHA1 | no
+SignatureMethod | SHA1 | no
 
 ### Transaction
 
@@ -77,7 +78,7 @@ $gateway->transaction(110.55, 'ORDER-01');
 ### Get Values Array
 
 ```
-$pay = $gateway->get();
+$pay = $gatewau->get();
 
 var_dump($pay);
 ```

@@ -34,13 +34,20 @@ abstract class AbstractProvider implements ProviderInterface
         $this->mergeDefaults();
         $this->config['Signature'] = $this->makeSignature();
 
-        foreach ($this->unset() as $value) {
+        foreach ($this->remove() as $value) {
             if (isset($this->config[$value])) {
                 unset($this->config[$value]);
             }
         }
 
         return $this->config;
+    }
+
+    protected function getExponent()
+    {
+        if (isset($this->config['PurchaseCurrencyExponent'])) {
+            return $this->config['PurchaseCurrencyExponent'];
+        }
     }
 
     protected function mergeDefaults()
