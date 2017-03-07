@@ -78,7 +78,7 @@ $gateway->transaction(110.55, 'ORDER-01');
 ### Get Values Array
 
 ```
-$pay = $gatewau->get();
+$pay = $gateway->get();
 
 var_dump($pay);
 ```
