@@ -105,7 +105,9 @@ $pay = $gateway->config($config)
 The callback method verifies the response signature from the gateway. If missmatched will throw a **SignatureMissmatchException**
 
 It accepts 2 parameters:
+
 **response** *(array)* `$_POST` response from the gateway
+
 **orderId** *(string)* The unique order id that you made the request with
 
 Example:
