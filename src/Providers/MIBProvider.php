@@ -2,6 +2,8 @@
 
 namespace aharen\Pay\Providers;
 
+use aharen\Pay\Exceptions\SignatureMissmatchException;
+
 class MIBProvider extends AbstractProvider
 {
     protected function rules()
@@ -77,5 +79,24 @@ class MIBProvider extends AbstractProvider
     {
         $decimalAmount = number_format($amount, $this->getExponent(), '.', '');
         return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
+    }
+
+    protected function verifySignature()
+    {
+        $this->mergeDefaults();
+        if (!$this->makeSignature(true) === $this->response['Signature']) {
+            throw new SignatureMissmatchException();
+        }
+    }
+
+    public function callback(array $response, string $orderId)
+    {
+        $this->response = $response;
+        if ((int) $this->response['ResponseCode'] === 1) {
+            $this->config['OrderID'] = $orderId;
+            $this->verifySignature($response);
+        }
+
+        return $this->response;
     }
 }

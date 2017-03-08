@@ -9,6 +9,8 @@ abstract class AbstractProvider implements ProviderInterface
 {
     protected $config;
 
+    protected $response;
+
     abstract protected function rules();
 
     abstract protected function defaults();
@@ -16,6 +18,8 @@ abstract class AbstractProvider implements ProviderInterface
     abstract protected function makeSignature();
 
     abstract protected function makePurchaseAmt(float $amount);
+
+    abstract protected function verifySignature();
 
     public function make(array $config)
     {
@@ -58,15 +62,6 @@ abstract class AbstractProvider implements ProviderInterface
             }
         }
     }
-
-    public function verify($signature)
-    {
-        $this->mergeDefaults();
-        return ($this->makeSignature(true) === $signature);
-    }
-
-    public function callback($request)
-    {}
 
     protected function validateConfig(array $config)
     {

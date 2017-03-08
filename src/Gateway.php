@@ -40,8 +40,8 @@ class Gateway
         return $this->provider->get();
     }
 
-    public function verify($signature)
+    public function callback($response, $orderId)
     {
-        return $this->provider->verify($signature);
+        return $this->provider->callback($response, $orderId);
     }
 }

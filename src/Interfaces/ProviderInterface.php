@@ -6,5 +6,5 @@ interface ProviderInterface
 {
     public function make(array $config);
 
-    public function callback($request);
+    public function callback(array $response, string $orderId);
 }

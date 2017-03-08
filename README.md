@@ -100,6 +100,36 @@ $pay = $gateway->config($config)
     ->get();
 ```
 
+### Callback
+
+The callback method verifies the response signature from the gateway. If missmatched will throw a **SignatureMissmatchException**
+
+It accepts 2 parameters:
+**response** *(array)* `$_POST` response from the gateway
+**orderId** *(string)* The unique order id that you made the request with
+
+Example:
+
+```
+$config = [
+    'Host'        => 'banking-gateway-uri',
+    'MerRespURL'  => 'callback-uri',
+    'AcqID'       => 'aquirer-id',
+    'MerID'       => 'merchant-id',
+    'MerPassword' => 'merchant-password',
+];
+
+$response = $_POST;
+
+Or if you're using laravel you can pass the **Request** array like:
+
+$response = Request::all();
+
+$gateway = new Gateway('MPG');
+$pay = $gateway->config($config)
+    ->callback($response, 'ORDER-01');
+```
+
 ### TODO
 
 - tests
