@@ -123,7 +123,7 @@ $config = [
 
 $response = $_POST;
 
-Or if you're using laravel you can pass the **Request** array like:
+Or if you're using laravel you can pass the 'Request' array like:
 
 $response = Request::all();
 

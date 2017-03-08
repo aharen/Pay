@@ -73,7 +73,7 @@ class MPGProvider extends AbstractProvider
     protected function verifySignature()
     {
         $this->mergeDefaults();
-        if (!$this->makeSignature(true) === $this->response['Signature']) {
+        if ($this->makeSignature(true) !== $this->response['Signature']) {
             throw new SignatureMissmatchException();
         }
     }
