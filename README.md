@@ -12,7 +12,7 @@ or update your `composer.json` as follows and run `composer update`
 
 ```
 require: {
-    "aharen/pay": "1.0.*"
+    "aharen/pay": "1.1.*"
 }
 ```
 
@@ -131,6 +131,10 @@ $gateway = new Gateway('MPG');
 $pay = $gateway->config($config)
     ->callback($response, 'ORDER-01');
 ```
+
+### CREDITS
+
+- MIB v2 updated by [hammaadhrasheedh](https://github.com/hammaadhrasheedh)
 
 ### TODO
 
