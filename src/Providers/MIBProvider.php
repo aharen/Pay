@@ -26,7 +26,7 @@ class MIBProvider extends AbstractProvider
         return [
             'PurchaseCurrency'         => '462',
             'PurchaseCurrencyExponent' => '2',
-            'Version'                  => '1',
+            'Version'                  => '2',
             'SignatureMethod'          => 'SHA1',
         ];
     }
@@ -48,6 +48,8 @@ class MIBProvider extends AbstractProvider
 
     protected function makeSignature($response = false)
     {
+        $requestType = '0'; //For Purchase request, this value is always 0
+
         $signatureValue = $this->config['MerPassword'] .
         $this->config['MerID'] .
         $this->config['AcqID'] .
@@ -55,7 +57,12 @@ class MIBProvider extends AbstractProvider
 
         if (!$response) {
             $signatureValue .= $this->config['PurchaseAmt'] .
-            $this->config['PurchaseCurrency'];
+            $this->config['PurchaseCurrency'].
+            $this->getExponent();
+        }
+
+        if($response){
+            $signatureValue = $requestType.$signatureValue.$this->response['salt'];
         }
 
         if ($this->config['SignatureMethod'] === 'SHA1') {
@@ -78,13 +85,14 @@ class MIBProvider extends AbstractProvider
     protected function makePurchaseAmt(float $amount)
     {
         $decimalAmount = number_format($amount, $this->getExponent(), '.', '');
-        return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
+        return str_replace('.', '', $decimalAmount);
+        // return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
     }
 
     protected function verifySignature()
     {
         $this->mergeDefaults();
-        if ($this->makeSignature(true) !== $this->response['Signature']) {
+        if ($this->makeSignature(true) !== $this->response['signature']) {
             throw new SignatureMissmatchException();
         }
     }
@@ -92,7 +100,7 @@ class MIBProvider extends AbstractProvider
     public function callback(array $response, string $orderId)
     {
         $this->response = $response;
-        if ((int) $this->response['ResponseCode'] === 1) {
+        if ((int) $this->response['responseCode'] === 1) {
             $this->config['OrderID'] = $orderId;
             $this->verifySignature($response);
         }
