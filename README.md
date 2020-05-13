@@ -60,7 +60,7 @@ MerID | null | yes
 MerPassword | null | yes
 PurchaseCurrency | 462 | no
 PurchaseCurrencyExponent | 2 | If you have the gateway setup to a value different from the default, make sure that this is set correctly.
-Version | MIB: 1, MPG: 1.1 | no
+Version | MIB: 2, MPG: 1.1 | no
 SignatureMethod | SHA1 | no
 SignatureMethod | SHA1 | no
 
