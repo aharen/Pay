@@ -9,39 +9,39 @@ class MIBProvider extends AbstractProvider
     protected function rules()
     {
         return [
-            'Host'                     => true,
-            'MerRespURL'               => true,
-            'PurchaseCurrency'         => false,
-            'PurchaseCurrencyExponent' => false,
-            'Version'                  => false,
-            'SignatureMethod'          => false,
-            'AcqID'                    => true,
-            'MerID'                    => true,
-            'MerPassword'              => true,
+            'host' => true,
+            'merRespURL' => true,
+            'purchaseCurrency' => false,
+            'purchaseCurrencyExponent' => false,
+            'version' => false,
+            'signatureMethod' => false,
+            'acqID' => true,
+            'merID' => true,
+            'merPassword' => true,
         ];
     }
 
     protected function defaults()
     {
         return [
-            'PurchaseCurrency'         => '462',
-            'PurchaseCurrencyExponent' => '2',
-            'Version'                  => '2',
-            'SignatureMethod'          => 'SHA1',
+            'purchaseCurrency' => '462',
+            'purchaseCurrencyExponent' => '2',
+            'version' => '2',
+            'signatureMethod' => 'SHA1',
         ];
     }
 
     protected function remove()
     {
         return [
-            'MerPassword',
+            'merPassword',
         ];
     }
 
     protected function getExponent()
     {
-        if (!isset($this->config['PurchaseCurrencyExponent'])) {
-            return $this->defaults()['PurchaseCurrencyExponent'];
+        if (!isset($this->config['purchaseCurrencyExponent'])) {
+            return $this->defaults()['purchaseCurrencyExponent'];
         }
         return parent::getExponent();
     }
@@ -50,22 +50,22 @@ class MIBProvider extends AbstractProvider
     {
         $requestType = '0'; //For Purchase request, this value is always 0
 
-        $signatureValue = $this->config['MerPassword'] .
-        $this->config['MerID'] .
-        $this->config['AcqID'] .
-        $this->config['OrderID'];
+        $signatureValue = $this->config['merPassword'] .
+        $this->config['merID'] .
+        $this->config['acqID'] .
+        $this->config['orderID'];
 
         if (!$response) {
-            $signatureValue .= $this->config['PurchaseAmt'] .
-            $this->config['PurchaseCurrency'].
+            $signatureValue .= $this->config['purchaseAmt'] .
+            $this->config['purchaseCurrency'] .
             $this->getExponent();
         }
 
-        if($response){
-            $signatureValue = $requestType.$signatureValue.$this->response['salt'];
+        if ($response) {
+            $signatureValue = $requestType . $signatureValue . $this->response['salt'];
         }
 
-        if ($this->config['SignatureMethod'] === 'SHA1') {
+        if ($this->config['signatureMethod'] === 'SHA1') {
             return $this->makeSHA1Signature($signatureValue);
         }
 
@@ -86,7 +86,6 @@ class MIBProvider extends AbstractProvider
     {
         $decimalAmount = number_format($amount, $this->getExponent(), '.', '');
         return str_replace('.', '', $decimalAmount);
-        // return str_pad(str_replace('.', '', $decimalAmount), 12, 0, STR_PAD_LEFT);
     }
 
     protected function verifySignature()
@@ -101,10 +100,30 @@ class MIBProvider extends AbstractProvider
     {
         $this->response = $response;
         if ((int) $this->response['responseCode'] === 1) {
-            $this->config['OrderID'] = $orderId;
+            $this->config['orderID'] = $orderId;
             $this->verifySignature($response);
         }
 
         return $this->response;
+    }
+
+    public function transaction(float $amount, string $orderId)
+    {
+        $this->config['purchaseAmt'] = $this->makePurchaseAmt($amount);
+        $this->config['orderID'] = $orderId;
+    }
+
+    public function get()
+    {
+        $this->mergeDefaults();
+        $this->config['signature'] = $this->makeSignature();
+
+        foreach ($this->remove() as $value) {
+            if (isset($this->config[$value])) {
+                unset($this->config[$value]);
+            }
+        }
+
+        return $this->config;
     }
 }
