@@ -12,7 +12,7 @@ or update your `composer.json` as follows and run `composer update`
 
 ```
 require: {
-    "aharen/pay": "1.0.*"
+    "aharen/pay": "1.1.*"
 }
 ```
 
@@ -22,6 +22,8 @@ Initialize with the Gateway provider that you need, options are:
 
 - **MPG** (Maldives Payment Gateway by Bank of Maldives) 
 - **MIB** (Maldives Islamic Bank)
+
+**ATTENTION:** For MIB Gateway version 1 use v1.0.* of the package. From v1.1.* of the package it is for MIB Gateway version 2
 
 ```
 use aharen\Pay\Gateway;
@@ -50,6 +52,8 @@ $gateway->config([
 ```
 
 Below are all the available config options:
+
+**ATTENTION:** For MIB Gateway version 2 you have to have the first letter in lower case eg: **Host** becomes **host** and **MerRespURL** becomes **merRespURL**
 
 Option | Default | Required
 --- | --- | ---
@@ -131,6 +135,10 @@ $gateway = new Gateway('MPG');
 $pay = $gateway->config($config)
     ->callback($response, 'ORDER-01');
 ```
+
+### CREDITS
+
+- MIB v2 updated by [hammaadhrasheedh](https://github.com/hammaadhrasheedh)
 
 ### TODO
 
