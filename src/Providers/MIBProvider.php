@@ -104,6 +104,11 @@ class MIBProvider extends AbstractProvider
             $this->verifySignature($response);
         }
 
+        // capitalize the first letter of each param for consistency
+        foreach ($this->response as $key => $value) {
+            $this->response[ucfirst($key)] = $value;
+        }
+
         return $this->response;
     }
 
