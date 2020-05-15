@@ -23,6 +23,8 @@ Initialize with the Gateway provider that you need, options are:
 - **MPG** (Maldives Payment Gateway by Bank of Maldives) 
 - **MIB** (Maldives Islamic Bank)
 
+**ATTENTION:** For MIB Gateway version 1 use v1.0.* of the package. From v1.1.* of the package it is for MIB Gateway version 2
+
 ```
 use aharen\Pay\Gateway;
 
@@ -50,6 +52,8 @@ $gateway->config([
 ```
 
 Below are all the available config options:
+
+**ATTENTION:** For MIB Gateway version 2 you have to have the first letter in lower case eg: **Host** becomes **host** and **MerRespURL** becomes **merRespURL**
 
 Option | Default | Required
 --- | --- | ---
