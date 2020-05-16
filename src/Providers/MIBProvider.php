@@ -43,7 +43,8 @@ class MIBProvider extends AbstractProvider
         if (!isset($this->config['purchaseCurrencyExponent'])) {
             return $this->defaults()['purchaseCurrencyExponent'];
         }
-        return parent::getExponent();
+
+        return $this->config['purchaseCurrencyExponent'];
     }
 
     protected function makeSignature($response = false)
