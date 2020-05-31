@@ -12,7 +12,7 @@ or update your `composer.json` as follows and run `composer update`
 
 ```
 require: {
-    "aharen/pay": "1.1.*"
+    "aharen/pay": "1.2.*"
 }
 ```
 

@@ -1,7 +1,7 @@
 {
     "name": "aharen/pay",
-    "description": "Payment processing with Bank of Maldives/Maldives Payment Gateway (MPG) & Maldives Islamic Bank (MIB)",
-    "keywords": ["maldives", "payment", "gateway", "mpg", "bml", "fisa", "fisanet", "bank", "mib"],
+    "description": "Payment processing with Bank of Maldives/Maldives Payment Gateway (MPG), Maldives Islamic Bank (MIB) & MFaisaa by Oooredoo Maldives.",
+    "keywords": ["maldives", "payment", "gateway", "mpg", "bml", "fisa", "fisanet", "bank", "mib", "mfaisaa"],
     "type": "library",
     "license": "MIT",
     "authors": [{
@@ -10,6 +10,9 @@
     }],
     "minimum-stability": "dev",
     "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^8.0"
+    },
     "autoload": {
         "psr-4": {
             "aharen\\Pay\\": "src/"
