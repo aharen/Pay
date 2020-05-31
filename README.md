@@ -43,9 +43,9 @@ If an invalid provider is set an `InvalidProviderException` will be thrown.
 
 ### Config
 
-[Maldives Payment Gateway by Bank of Maldives (MPG),  Usage](MFaisaa-Config.md)
-[Maldives Islamic Bank (MIB),  Usage](MIB-Config.md)
-[Ooredoo MFaisaa (MFaisaa),  Usage](MFaisaa-Config.md)
+[Maldives Payment Gateway by Bank of Maldives (MPG),  Usage](MFaisaa-Config.md)\
+[Maldives Islamic Bank (MIB),  Usage](MIB-Config.md)\
+[Ooredoo MFaisaa (MFaisaa),  Usage](MFaisaa-Config.md)\
 
 ### CREDITS
 
