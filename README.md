@@ -22,6 +22,7 @@ Initialize with the Gateway provider that you need, options are:
 
 - **MPG** (Maldives Payment Gateway by Bank of Maldives) 
 - **MIB** (Maldives Islamic Bank)
+- **MFaisaa** (Ooredoo MFaisaa)
 
 **ATTENTION:** For MIB Gateway version 1 use v1.0.* of the package. From v1.1.* of the package it is for MIB Gateway version 2
 
@@ -33,6 +34,9 @@ $gatway = new Gateway('MPG');
 
 // this initiates MIB
 $gatway = new Gateway('MIB');
+
+// this initiates MFaisaa
+$gatway = new Gateway('MFaisaa');
 ```
 
 If an invalid provider is set an `InvalidProviderException` will be thrown.
@@ -139,6 +143,7 @@ $pay = $gateway->config($config)
 ### CREDITS
 
 - MIB v2 updated by [hammaadhrasheedh](https://github.com/hammaadhrasheedh)
+- MFaisaa added by [hammaadhrasheedh](https://github.com/hammaadhrasheedh)
 
 ### TODO
 
