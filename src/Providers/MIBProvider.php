@@ -43,7 +43,8 @@ class MIBProvider extends AbstractProvider
         if (!isset($this->config['purchaseCurrencyExponent'])) {
             return $this->defaults()['purchaseCurrencyExponent'];
         }
-        return parent::getExponent();
+
+        return $this->config['purchaseCurrencyExponent'];
     }
 
     protected function makeSignature($response = false)
@@ -102,6 +103,11 @@ class MIBProvider extends AbstractProvider
         if ((int) $this->response['responseCode'] === 1) {
             $this->config['orderID'] = $orderId;
             $this->verifySignature($response);
+        }
+
+        // capitalize the first letter of each param for consistency
+        foreach ($this->response as $key => $value) {
+            $this->response[ucfirst($key)] = $value;
         }
 
         return $this->response;
