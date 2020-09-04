@@ -2,6 +2,8 @@
 
 Process payments with Maldives Banking Gateways. Currently Supports Maldives Payment Gateway (MPG) by Bank of Maldives, Maldives Islamic Bank and MFaisaa by Ooredoo Maldives.
 
+**NOTE:** If you are looking for a WooCommerce (WordPress) implementation please take a look at [https://github.com/ashhama/woocommerce-bml-mpos-integration](https://github.com/ashhama/woocommerce-bml-mpos-integration)
+
 ## Installation
 
 ```
