@@ -1,6 +1,6 @@
 <?php
 
-namespace aharen\Pay\interfaces;
+namespace aharen\Pay\Interfaces;
 
 interface ProviderInterface
 {
